@@ -67,6 +67,24 @@ namespace _8_Puzzle_Console
             Depth=parent.Depth+1;
             StartTile=parent.StartTile;
         }
+        public bool IsSolvable(){
+            bool IsNumberInversionsEven=CountInversions()%2==0;
+            bool IsEmptyEvenRowFromBottom=false;
+        //
+        }
+        int CountInversions(){
+            int Count=0;
+            for(int i=0; i<Size*Size-1;i++){
+                for(int j=i+1; j<Size*Size;j++){
+                    if(Tiles[i/Size,i%Size]>Tiles[j/Size,j%Size]){
+                        if(Tiles[i/Size,i%Size]!=EmptyCell&&Tiles[j/Size,j%Size]!=EmptyCell){
+                            Count++;
+                        }
+                    }
+                }
+            }
+            return Count;
+        }
         public void Unfold(){
             children=new List<State>();
             int row=-1;
