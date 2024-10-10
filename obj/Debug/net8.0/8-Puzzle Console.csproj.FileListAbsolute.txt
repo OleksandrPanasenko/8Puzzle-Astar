@@ -1,0 +1,14 @@
+c:\Users\op101\OneDrive\Desktop\Курсова\8-Puzzle Console\bin\Debug\net8.0\8-Puzzle Console.exe
+C:\Users\op101\OneDrive\Desktop\Курсова\8-Puzzle Console\bin\Debug\net8.0\8-Puzzle Console.deps.json
+C:\Users\op101\OneDrive\Desktop\Курсова\8-Puzzle Console\bin\Debug\net8.0\8-Puzzle Console.runtimeconfig.json
+c:\Users\op101\OneDrive\Desktop\Курсова\8-Puzzle Console\bin\Debug\net8.0\8-Puzzle Console.dll
+c:\Users\op101\OneDrive\Desktop\Курсова\8-Puzzle Console\bin\Debug\net8.0\8-Puzzle Console.pdb
+c:\Users\op101\OneDrive\Desktop\Курсова\8-Puzzle Console\obj\Debug\net8.0\8-Puzzle Console.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\op101\OneDrive\Desktop\Курсова\8-Puzzle Console\obj\Debug\net8.0\8-Puzzle Console.AssemblyInfoInputs.cache
+c:\Users\op101\OneDrive\Desktop\Курсова\8-Puzzle Console\obj\Debug\net8.0\8-Puzzle Console.AssemblyInfo.cs
+c:\Users\op101\OneDrive\Desktop\Курсова\8-Puzzle Console\obj\Debug\net8.0\8-Puzzle Console.csproj.CoreCompileInputs.cache
+c:\Users\op101\OneDrive\Desktop\Курсова\8-Puzzle Console\obj\Debug\net8.0\8-Puzzle Console.dll
+c:\Users\op101\OneDrive\Desktop\Курсова\8-Puzzle Console\obj\Debug\net8.0\refint\8-Puzzle Console.dll
+c:\Users\op101\OneDrive\Desktop\Курсова\8-Puzzle Console\obj\Debug\net8.0\8-Puzzle Console.pdb
+C:\Users\op101\OneDrive\Desktop\Курсова\8-Puzzle Console\obj\Debug\net8.0\8-Puzzle Console.genruntimeconfig.cache
+C:\Users\op101\OneDrive\Desktop\Курсова\8-Puzzle Console\obj\Debug\net8.0\ref\8-Puzzle Console.dll
