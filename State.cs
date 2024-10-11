@@ -70,7 +70,15 @@ namespace _8_Puzzle_Console
         public bool IsSolvable(){
             bool IsNumberInversionsEven=CountInversions()%2==0;
             bool IsEmptyEvenRowFromBottom=false;
-        //
+            for(int i=0;i<Size*Size;i++){
+                if(Tiles[i/Size,i%Size]==EmptyCell){
+                    IsEmptyEvenRowFromBottom=(Size-i)%2==0;
+                    break;
+                }
+            }
+            if(Size%2==1) return IsNumberInversionsEven;
+            if(IsEmptyEvenRowFromBottom!=IsNumberInversionsEven) return true;
+            return false;
         }
         int CountInversions(){
             int Count=0;
@@ -140,7 +148,7 @@ namespace _8_Puzzle_Console
         int[,] Tiles;
         public List<State> children;
         int Depth;
-        int Distance;
+        internal int Distance;
         public bool IsSolved{get{return Distance==0;}}
         public int Desirability{
                 get{
@@ -155,6 +163,18 @@ namespace _8_Puzzle_Console
         {
             get {return Tiles[i,j]; }
             set {Tiles[i,j]=value;  }
+        }
+        public static bool operator ==(State a, State b){
+            if(a.Size!=b.Size) return false;
+            for(int i=0;i<a.Size;i++){
+                for(int j=0;j<a.Size;j++){
+                    if(a[i,j]!=b[i,j]) return false;
+                }
+            }
+            return true;
+        }
+        public static bool operator !=(State a, State b){
+            return !(a==b); 
         }
     }
 }
