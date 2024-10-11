@@ -22,10 +22,31 @@ namespace _8_Puzzle_Console {
         public int EmptyCell;
         public int Iterations;
         public bool Solved;
-        State Start;
+        public State Start;
         public State Finish;
         List<State> Queue;
         List<State> Checked;
+        const int LimitLDFS=1000;
+        public void SolveLDFS(){
+            Iterations=0;
+            if(!Start.IsSolvable()) throw new Exception("Deemed Unsolvable");
+            InsertInQueue(Start);
+            State current=Start;
+            while(!current.IsSolved&&Queue.Count>0){
+                Iterations++;
+                Queue.RemoveAt(0);
+                current.Unfold();
+                foreach(State child in current.children){
+                    if(child.Depth<LimitLDFS&&!IsStateInChecked(child)) Queue.Insert(0,child);
+                }
+                Checked.Add(current);
+                current=Queue[0];
+            }
+            if(current.IsSolved){
+                Finish=current;
+                Solved=true;
+            }
+        }
         public void SolveAstar(){
             Iterations=0;
             if(!Start.IsSolvable()) throw new Exception("Deemed Unsolvable");
@@ -33,13 +54,13 @@ namespace _8_Puzzle_Console {
             State current=Start;
             while(!current.IsSolved){
                 Iterations++;
-                current=Queue[0];
                 Queue.RemoveAt(0);
                 current.Unfold();
                 foreach(State child in current.children){
                     if(!IsStateInChecked(child)) InsertInQueue(child);
                 }
                 Checked.Add(current);
+                current=Queue[0];
             }
             Finish=current;
             Solved=true;

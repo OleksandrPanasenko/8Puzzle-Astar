@@ -77,10 +77,10 @@ namespace _8_Puzzle_Console
                 }
             }
             if(Size%2==1) return IsNumberInversionsEven;
-            if(IsEmptyEvenRowFromBottom!=IsNumberInversionsEven) return true;
+            if(IsEmptyEvenRowFromBottom==IsNumberInversionsEven) return true;
             return false;
         }
-        int CountInversions(){
+        public int CountInversions(){
             int Count=0;
             for(int i=0; i<Size*Size-1;i++){
                 for(int j=i+1; j<Size*Size;j++){
@@ -145,9 +145,9 @@ namespace _8_Puzzle_Console
         }
     
         public readonly int Size;
-        int[,] Tiles;
+        public readonly int[,] Tiles;
         public List<State> children;
-        int Depth;
+        public int Depth;
         internal int Distance;
         public bool IsSolved{get{return Distance==0;}}
         public int Desirability{

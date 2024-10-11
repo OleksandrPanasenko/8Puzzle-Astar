@@ -12,3 +12,18 @@ c:\Users\op101\OneDrive\Desktop\Курсова\8-Puzzle Console\obj\Debug\net8.0
 c:\Users\op101\OneDrive\Desktop\Курсова\8-Puzzle Console\obj\Debug\net8.0\8-Puzzle Console.pdb
 C:\Users\op101\OneDrive\Desktop\Курсова\8-Puzzle Console\obj\Debug\net8.0\8-Puzzle Console.genruntimeconfig.cache
 C:\Users\op101\OneDrive\Desktop\Курсова\8-Puzzle Console\obj\Debug\net8.0\ref\8-Puzzle Console.dll
+d:\Lab 2 Find Path\Astar x LDFS\8-Puzzle Console\bin\Debug\net8.0\8-Puzzle Console.exe
+D:\Lab 2 Find Path\Astar x LDFS\8-Puzzle Console\bin\Debug\net8.0\8-Puzzle Console.deps.json
+D:\Lab 2 Find Path\Astar x LDFS\8-Puzzle Console\bin\Debug\net8.0\8-Puzzle Console.runtimeconfig.json
+d:\Lab 2 Find Path\Astar x LDFS\8-Puzzle Console\bin\Debug\net8.0\8-Puzzle Console.dll
+d:\Lab 2 Find Path\Astar x LDFS\8-Puzzle Console\bin\Debug\net8.0\8-Puzzle Console.pdb
+d:\Lab 2 Find Path\Astar x LDFS\8-Puzzle Console\obj\Debug\net8.0\8-Puzzle Console.GeneratedMSBuildEditorConfig.editorconfig
+d:\Lab 2 Find Path\Astar x LDFS\8-Puzzle Console\obj\Debug\net8.0\8-Puzzle Console.AssemblyInfoInputs.cache
+d:\Lab 2 Find Path\Astar x LDFS\8-Puzzle Console\obj\Debug\net8.0\8-Puzzle Console.AssemblyInfo.cs
+d:\Lab 2 Find Path\Astar x LDFS\8-Puzzle Console\obj\Debug\net8.0\8-Puzzle Console.csproj.CoreCompileInputs.cache
+d:\Lab 2 Find Path\Astar x LDFS\8-Puzzle Console\obj\Debug\net8.0\8-Puzzle Console.sourcelink.json
+d:\Lab 2 Find Path\Astar x LDFS\8-Puzzle Console\obj\Debug\net8.0\8-Puzzle Console.dll
+d:\Lab 2 Find Path\Astar x LDFS\8-Puzzle Console\obj\Debug\net8.0\refint\8-Puzzle Console.dll
+d:\Lab 2 Find Path\Astar x LDFS\8-Puzzle Console\obj\Debug\net8.0\8-Puzzle Console.pdb
+D:\Lab 2 Find Path\Astar x LDFS\8-Puzzle Console\obj\Debug\net8.0\8-Puzzle Console.genruntimeconfig.cache
+D:\Lab 2 Find Path\Astar x LDFS\8-Puzzle Console\obj\Debug\net8.0\ref\8-Puzzle Console.dll
