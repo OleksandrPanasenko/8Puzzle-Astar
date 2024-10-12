@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices.JavaScript;
 using System.Security.Cryptography.X509Certificates;
@@ -8,17 +9,34 @@ using System.Threading.Tasks;
 using _8_Puzzle_Console;
 
 const int SIZE=3;
+State start;
+if(FirstOrSecond("How do you want to get table set up?","Auto generate", "Type yourself")==1){
+    start=new State(GetSize());
+}
+else{
+    do{
+        start=StateFromConsole();
+        if(!start.IsSolvable()){
+            Console.WriteLine("This is unsolvable. Try something again");
+        }
+    }while(!start.IsSolvable());
+}
+Game game=new Game(start);
+Stopwatch sw;
+if(FirstOrSecond("Which method to use?", "LDFS", "A*")==1){
+    sw=new Stopwatch();
+    game.SolveLDFS();
+}
+else{
+    sw=new Stopwatch();
+    game.SolveAstar();
+}
 
-Game game;
-do{
-    game=new Game(SIZE);
-    Console.WriteLine(game.Start.CountInversions());
-}while(!game.Start.IsSolvable());
-
-game.SolveLDFS();
+OutputIntoConsole(game);
+Console.WriteLine($"Time - {sw.ElapsedMilliseconds/1000} seconds");
 
 
-void OutputIntoConsole(){
+void OutputIntoConsole(Game game){
     List<int[,]> states=[game.Start.Tiles];
     State current=game.Finish;
     while(current!=game.Start){
@@ -50,10 +68,11 @@ void OutputIntoConsole(){
     Console.WriteLine($"Number of iterations: {game.Iterations}");
     Console.WriteLine($"Steps: {states.Count-1}");
 }
-State StateFromConsole(){
-    bool Okay=false;
+int GetSize(){
     int size=0;
+    bool Okay=false;
     do{
+        Okay=true;
         try{
             Console.WriteLine("Length in squares:");
             size=int.Parse(Console.ReadLine());
@@ -66,6 +85,12 @@ State StateFromConsole(){
             Console.WriteLine("Write only a number");    
         }
     }while(!Okay);
+    return size;
+}
+State StateFromConsole(){
+    int size=GetSize();
+    bool Okay=false;
+    
     int [,] Array=new int[size,size];
     for(int i=0;i<size*size;i++){
         int current=-1;
@@ -108,3 +133,14 @@ string ArrayToStringTable(int[,] arr, int size, int place){
     }
     return line;
 }
+int FirstOrSecond(string message, string first, string second){
+    string input;
+    do{
+        Console.WriteLine(message);
+        Console.WriteLine($"1 - {first}\n 2 - {second}");
+        input=Console.ReadLine();
+        if(input!="1"&&input!="2") Console.WriteLine("Write '1' or '2'");
+    }while(input!="1"&&input!="2");
+    return int.Parse(input);
+}
+
