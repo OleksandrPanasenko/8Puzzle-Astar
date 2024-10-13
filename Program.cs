@@ -208,4 +208,35 @@ bool Equal(State a, State b){
     }
     return true;
 }
-*/
+
+
+void TestOn20ForLab(){
+    int size=3;
+    State start=new State(3);
+    for(int i = 0;i < 20; i++){
+        do{
+        start=new State(size);
+        }while (!start.IsSolvable());
+    
+    
+        Game game1 = new Game(start);
+        Console.WriteLine($"\nExperiment number {i+1}:");
+        Console.WriteLine(ArrayToStringTable(game1.Start.Tiles, 3, 9));
+        Stopwatch sw=new Stopwatch();
+        sw.Start();
+        game1.SolveLDFS();
+        sw.Stop();
+        if(game1.Finish is not null&&game1.Finish.IsSolved){
+            Console.WriteLine($"    Time - {sw.ElapsedMilliseconds} miliseconds");
+            Console.WriteLine($"    Number of iterations: {game1.Iterations}");
+            Console.WriteLine($"    Steps: {game1.Finish.Depth}");
+            Console.WriteLine($"    Total checked: {game1.Checked.Count}");
+            Console.WriteLine($"    Remained in queue: {game1.Queue.Count}");
+        }
+        else{
+            Console.WriteLine("    Solution wasn't found");
+            Console.WriteLine($"    Time - {sw.ElapsedMilliseconds} miliseconds");
+        }
+    }
+    
+}*/

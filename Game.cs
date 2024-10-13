@@ -24,9 +24,10 @@ namespace _8_Puzzle_Console {
         public bool Solved;
         public State Start;
         public State Finish;
-        List<State> Queue;
+        public List<State> Queue;
         public List<State> Checked;
         const int LimitLDFS=1000;
+        const int LDFSMaxSteps=100000;
         public void SolveLDFS(){
             Iterations=0;
             if(!Start.IsSolvable()) throw new Exception("Deemed Unsolvable");
@@ -42,6 +43,7 @@ namespace _8_Puzzle_Console {
                 Checked.Add(current);
                 if(Queue.Count==0) return;
                 current=Queue[0];
+                if (Iterations>LDFSMaxSteps) return;
             }
             if(current.IsSolved){
                 Finish=current;
@@ -53,35 +55,21 @@ namespace _8_Puzzle_Console {
             if(!Start.IsSolvable()) throw new Exception("Deemed Unsolvable");
             InsertInQueue(Start);
             State current=Start;
-            bool CountStatrted=false;
             while(!current.IsSolved){
                 Iterations++;
                 Queue.RemoveAt(0);
                 current.Unfold();
                 foreach(State child in current.children){
-                    if(Equal(child, State.reference)){
-                        Console.WriteLine("It appears as child");
-                        CountStatrted=true;
-                    }
                     if(!IsStateInChecked(child)) InsertInQueue(child);
-                    if(Equal(child, State.reference)){
-                        Console.WriteLine("Child Inserted!");
-                        CountStatrted=true;
-                    }
-                    if(CountStatrted&&(!IsStateInChecked(State.reference))&&(!IsStateInQueue(State.reference))){
-                        Console.WriteLine("It disappeared!");
-                    }
                 }
-                if(this.IsStateInChecked(State.reference)){
-                    Console.WriteLine($"Bastard was found! ");
-                };
                 Checked.Add(current);
                 current=Queue[0];
-            }
+                }
             Finish=current;
             Solved=true;
-        }
-        public void InsertInQueue(State state){
+            }   
+        
+        void InsertInQueue(State state){
             if(Queue.Count==0){
                 Queue.Add(state);
                 return;
@@ -100,16 +88,6 @@ namespace _8_Puzzle_Console {
                     return;
                 }
             }
-        }
-        public bool IsStateInQueue(State state){
-            foreach(State checking in Queue){
-                if(state.Distance==checking.Distance){
-                    if(Equal(checking, state)) {
-                        return true;
-                    }
-                }
-            }
-            return false;
         }
         public bool IsStateInChecked(State state){
             foreach(State checking in Checked){

@@ -143,8 +143,6 @@ namespace _8_Puzzle_Console
                 Unfolded=true;
             }
         }
-        public static State reference;
-
         public readonly int Size;
         public readonly int[,] Tiles;
         public List<State> children;
