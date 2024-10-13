@@ -72,7 +72,7 @@ namespace _8_Puzzle_Console
             bool IsEmptyEvenRowFromBottom=false;
             for(int i=0;i<Size*Size;i++){
                 if(Tiles[i/Size,i%Size]==EmptyCell){
-                    IsEmptyEvenRowFromBottom=(Size-i)%2==0;
+                    IsEmptyEvenRowFromBottom=(Size-i/Size)%2==0;
                     break;
                 }
             }
@@ -143,7 +143,8 @@ namespace _8_Puzzle_Console
                 Unfolded=true;
             }
         }
-    
+        public static State reference;
+
         public readonly int Size;
         public readonly int[,] Tiles;
         public List<State> children;
@@ -165,6 +166,8 @@ namespace _8_Puzzle_Console
             set {Tiles[i,j]=value;  }
         }
         public static bool operator ==(State a, State b){
+            if(a is null &&b is null)return true;
+            if(a is null || b is null) return false;
             if(a.Size!=b.Size) return false;
             for(int i=0;i<a.Size;i++){
                 for(int j=0;j<a.Size;j++){
@@ -177,4 +180,5 @@ namespace _8_Puzzle_Console
             return !(a==b); 
         }
     }
+    
 }

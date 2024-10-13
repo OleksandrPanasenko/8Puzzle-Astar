@@ -8,10 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using _8_Puzzle_Console;
 
-const int SIZE=3;
 State start;
 if(FirstOrSecond("How do you want to get table set up?","Auto generate", "Type yourself")==1){
-    start=new State(GetSize());
+    int size=GetSize();
+    do{
+    start=new State(size);
+    }while (!start.IsSolvable());
 }
 else{
     do{
@@ -22,27 +24,36 @@ else{
     }while(!start.IsSolvable());
 }
 Game game=new Game(start);
-Stopwatch sw;
+Stopwatch sw=new Stopwatch();
+sw.Start();
 if(FirstOrSecond("Which method to use?", "LDFS", "A*")==1){
-    sw=new Stopwatch();
+    Console.WriteLine(ArrayToStringTable(game.Start.Tiles, game.Size, game.Size*game.Size));
     game.SolveLDFS();
 }
 else{
+    Console.WriteLine(ArrayToStringTable(game.Start.Tiles, game.Size, game.Size*game.Size));
     sw=new Stopwatch();
     game.SolveAstar();
 }
-
-OutputIntoConsole(game);
-Console.WriteLine($"Time - {sw.ElapsedMilliseconds/1000} seconds");
-
+sw.Stop();
+if(game.Finish is not null&&game.Finish.IsSolved){
+    OutputIntoConsole(game);
+    Console.WriteLine($"Time - {sw.ElapsedMilliseconds} miliseconds");
+    Console.WriteLine(ArrayToStringTable(game.Start.Tiles, game.Size, game.Size*game.Size));
+}
+else{
+    Console.WriteLine("Solution wasn't found");
+    Console.WriteLine($"Time - {sw.ElapsedMilliseconds} miliseconds");
+}
 
 void OutputIntoConsole(Game game){
+    int size=game.Size;
     List<int[,]> states=[game.Start.Tiles];
     State current=game.Finish;
     while(current!=game.Start){
-        int[,]array=new int[SIZE,SIZE];
-        for(int i=0;i<SIZE;i++){
-            for(int j=0;j<SIZE;j++){
+        int[,]array=new int[size,size];
+        for(int i=0;i<size;i++){
+            for(int j=0;j<size;j++){
                 array[i,j]=current[i,j];
             }
         }
@@ -53,11 +64,11 @@ void OutputIntoConsole(Game game){
 
     foreach(int[,] array in states){
         string line="";
-        for(int i=0;i<SIZE;i++){
+        for(int i=0;i<size;i++){
             line+="[";
-            for(int j=0;j<SIZE;j++){
+            for(int j=0;j<size;j++){
                 line+=array[i,j].ToString();
-                if(j<SIZE-1) line+=", ";
+                if(j<size-1) line+=", ";
             }
             line+="]\n";
         }
@@ -106,17 +117,19 @@ State StateFromConsole(){
                 Okay=false;
             }
             for(int m=0;m<i;m++){
-                if(Array[m*size,m%size]==current){
+                if(Array[m/size,m%size]==current){
                     Console.WriteLine("Number isn't unique");
                     Okay=false;
                 }
             }
             if(current<0||current>=size*size){
                 Console.WriteLine($"Number must be from 0 to {size*size-1}");
+                Okay=false;
             }
         } while (!Okay);
         Array[i/size,i%size]=current;
     }
+    Console.WriteLine(ArrayToStringTable(Array, size, size*size));
     return new State(size, Array);
 }
 string ArrayToStringTable(int[,] arr, int size, int place){
@@ -127,7 +140,7 @@ string ArrayToStringTable(int[,] arr, int size, int place){
             if(i*size+j<place) line+=arr[i,j].ToString();
             if(i*size+j==place) line+="?";
             if(i*size+j>place) line+="_";
-            if(j<SIZE-1) line+=", ";
+            if(j<size-1) line+=", ";
         }
         line+="]\n";
     }
@@ -144,3 +157,55 @@ int FirstOrSecond(string message, string first, string second){
     return int.Parse(input);
 }
 
+
+/*State start=new State(3,new int[,]{{1,4,2},{0,7,3},{5,8,6}});
+State reference=new State(3, new int[,]{{1,2,3},{0,4,6},{7,5,8}});
+State.reference=reference;
+Game game=new Game(start);
+try{
+    game.SolveAstar();
+    Console.WriteLine("You did it!!!!");
+}
+catch{
+    Console.WriteLine("Wasn't solved properly");
+}
+Console.WriteLine("Search begins");
+foreach(State checking in game.Checked){
+    if(game.IsStateInChecked(reference)){
+        Console.WriteLine($"Bastard was found! {checking.Desirability-checking.Depth}");
+    };
+    for(int i=0;i<8;i++){
+        for (int j=i+1;j<9;j++){
+            if (checking[i/3,i%3]==checking[j/3,j%3]) {
+                Console.WriteLine("A number repeated was found!");
+            };
+        }
+    }
+}
+game.InsertInQueue(reference);
+if(!game.IsStateInChecked(reference)){
+    Console.WriteLine($"It can't inert properly");
+};
+Console.WriteLine("We didn't find him");
+
+bool Equal(State a, State b){
+    int Count=0;
+    for(int i=0;i<3;i++){
+        for(int j=0;j<3;j++){
+            if(a[i,j]==b[i,j]) Count++;
+        }
+    }
+    if(Count==9){
+        Console.WriteLine("stop");
+    }
+    if(a is null &&b is null)return true;
+    if(a is null || b is null) return false;
+    if(a.Size!=b.Size) return false;
+    for(int i=0;i<a.Size;i++){
+        for(int j=0;j<a.Size;j++){
+            if(a[i,j]!=b[i,j]) return false;
+        }
+    }
+    return true;
+}
+*/
